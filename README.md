@@ -51,7 +51,6 @@ git:
 ## tmux config(`~/.tmux.conf):
 
 ```
-```
 # Enable mouse support
 set -g mouse on
 
@@ -96,5 +95,4 @@ bind -n C-4 send-keys C-e
 # Map Ctrl+b/e to skip words (consistent with Vim logic)
 bind -n C-b send-keys M-b
 bind -n C-e send-keys M-e
-```
 ```
