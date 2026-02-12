@@ -30,11 +30,10 @@ eval "$(gh copilot alias -- zsh)"
 
 - Other CLI  tools
 
- - htop
+ - htop, btop, nvtop
  - jq
  - lazygit
  - git-lfs
- - cheat
  - riggrep
  - fd
  - duf & dust
