@@ -50,60 +50,7 @@ if vim.fn.filereadable(colorscheme_config) == 1 then
 end
 
 
-local telescope = require('telescope')
-
-local search_hidden = false
--- Clone the default Telescope configuration
-local vimgrep_arguments = {
-  'rg',
-  '--color=never',
-  '--no-heading',
-  '--with-filename',
-  '--line-number',
-  '--column',
-  '--smart-case',
-}
-local vimgrep_no_ignore_arguments = {
-  'rg',
-  '--color=never',
-  '--no-heading',
-  '--with-filename',
-  '--line-number',
-  '--column',
-  '--smart-case',
-  '-u'     -- thats the new thing
-}
-
-function Toggle_search_hidden()
-  search_hidden = not search_hidden
-  local message = search_hidden and "Hidden files not excluded" or "Hidden files excluded"
-  vim.notify(message, vim.log.levels.INFO)
-
-  if search_hidden then
-    telescope.setup {
-      defaults = {
-        vimgrep_arguments = vimgrep_no_ignore_arguments,
-      },
-      pickers = {
-        find_files = {
-          find_command = { "fd", "-HI", "--type", "f" }
-        },
-      }
-    }
-  else
-    telescope.setup {
-      defaults = {
-        vimgrep_arguments = vimgrep_arguments
-      },
-      pickers = {
-        find_files = {
-          find_command = { "fd", "--type", "f" }
-        },
-      }
-    }
-  end
-end
-
+vim.opt.clipboard = "unnamedplus"
 vim.g.clipboard = {
   name = 'OSC 52',
   copy = {

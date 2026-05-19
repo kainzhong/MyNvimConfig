@@ -3,7 +3,6 @@
 -- Add any additional keymaps here
 
 local wk = require("which-key")
-local telescope = require('telescope.builtin')
 
 
 -- Use option+left/right to move to the start/ end of line in insert mode
@@ -48,27 +47,26 @@ wk.add({
 })
 
 wk.add({
-  { "<leader>t", desc = "telescope" },
+  { "<leader>t", desc = "picker" },
   {
     mode = { "n" },
-    { "<leader>tm", telescope.keymaps, desc = "keymaps" },
-    { "<leader>tq", telescope.quickfix, desc = "quickfix" },
-    { "<leader>tl", telescope.loclist, desc = "loclist" },
-    { "<leader>tf", telescope.find_files, desc = "find files" },
-    { "<leader>tg", telescope.live_grep, desc = "live grep" },
-    { "<leader>tb", telescope.buffers, desc = "buffers" },
-    { "<leader>th", telescope.help_tags, desc = "help tags" },
-    { "<leader>ts", telescope.lsp_document_symbols, desc = "document symbols" },
-    { "<leader>td", telescope.lsp_definitions, desc = "definitions" },
-    { "<leader>ti", telescope.lsp_implementations, desc = "implementations" },
-    { "<leader>tt", telescope.lsp_type_definitions, desc = "type definitions" },
-    { "<leader>tr", telescope.lsp_references, desc = "references" },
-    { "<leader>tc", telescope.commands, desc = "commands" },
-    { "<leader>tw", telescope.lsp_workspace_symbols, desc = "workspace symbols" },
-    { "<leader>to", telescope.lsp_document_diagnostics, desc = "document diagnostics" },
-    { "<leader>ta", telescope.lsp_workspace_diagnostics, desc = "workspace diagnostics" },
-    { "<leader>ty", telescope.lsp_dynamic_workspace_symbols, desc = "dynamic workspace symbols" },
-    { "<leader>te", telescope.lsp_workspace_code_actions, desc = "workspace code actions" },
+    { "<leader>tm", function() Snacks.picker.keymaps() end,                 desc = "keymaps" },
+    { "<leader>tq", function() Snacks.picker.qflist() end,                  desc = "quickfix" },
+    { "<leader>tl", function() Snacks.picker.loclist() end,                 desc = "loclist" },
+    { "<leader>tf", function() Snacks.picker.files() end,                   desc = "find files" },
+    { "<leader>tg", function() Snacks.picker.grep() end,                    desc = "live grep" },
+    { "<leader>tb", function() Snacks.picker.buffers() end,                 desc = "buffers" },
+    { "<leader>th", function() Snacks.picker.help() end,                    desc = "help tags" },
+    { "<leader>ts", function() Snacks.picker.lsp_symbols() end,             desc = "document symbols" },
+    { "<leader>td", function() Snacks.picker.lsp_definitions() end,         desc = "definitions" },
+    { "<leader>ti", function() Snacks.picker.lsp_implementations() end,     desc = "implementations" },
+    { "<leader>tt", function() Snacks.picker.lsp_type_definitions() end,    desc = "type definitions" },
+    { "<leader>tr", function() Snacks.picker.lsp_references() end,          desc = "references" },
+    { "<leader>tc", function() Snacks.picker.commands() end,                desc = "commands" },
+    { "<leader>tw", function() Snacks.picker.lsp_workspace_symbols() end,   desc = "workspace symbols" },
+    { "<leader>to", function() Snacks.picker.diagnostics_buffer() end,      desc = "document diagnostics" },
+    { "<leader>ta", function() Snacks.picker.diagnostics() end,             desc = "workspace diagnostics" },
+    { "<leader>ty", function() Snacks.picker.lsp_workspace_symbols() end,   desc = "dynamic workspace symbols" },
   },
 
   { "<leader>l", desc = "lazy"},
@@ -77,9 +75,5 @@ wk.add({
     { "<leader>ll", "<cmd>Lazy<cr>", desc = "lazy home"},
     { "<leader>le", "<cmd>LazyExtras<cr>", desc = "lazy extra home"},
   }
-})
-
-wk.add({
-  { '<leader>tx', '<cmd>lua Toggle_search_hidden()<CR>', desc = "Toggle exclude hidden" }
 })
 

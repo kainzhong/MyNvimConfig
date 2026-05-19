@@ -1,13 +1,6 @@
 return {
 
   {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
-    dependencies = { 'nvim-lua/plenary.nvim' }
-  },
-
-
-  {
     'akinsho/git-conflict.nvim',
     version = "*",
     config = true
@@ -57,6 +50,10 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    -- Pinned to 'master'; the 'main' rewrite is a separate config migration.
+    -- Folding uses Neovim's vim.treesitter.foldexpr() (set in init.lua), which
+    -- bypasses master's broken fold.lua.
+    branch = "master",
     opts = {
       ensure_installed = {
         "bash",
