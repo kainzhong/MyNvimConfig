@@ -63,3 +63,5 @@ vim.g.clipboard = {
   },
 }
 
+vim.opt.sessionoptions:append("folds")
+
