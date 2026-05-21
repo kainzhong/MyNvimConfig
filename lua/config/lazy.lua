@@ -65,3 +65,18 @@ vim.g.clipboard = {
 
 vim.opt.sessionoptions:append("folds")
 
+local fold_group = vim.api.nvim_create_augroup("AutoSaveFolds", { clear = true })
+
+-- Save fold settings when leaving a buffer
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = fold_group,
+  pattern = "*",
+  command = "silent! mkview",
+})
+
+-- Restore fold settings when entering a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = fold_group,
+  pattern = "*",
+  command = "silent! loadview",
+})
