@@ -51,6 +51,14 @@ wk.add({
 })
 
 wk.add({
+  { "<leader>w", group = "window" },
+  { "<leader>w+", "<cmd>resize +10<cr>",          desc = "Increase window height" },
+  { "<leader>w-", "<cmd>resize -10<cr>",          desc = "Decrease window height" },
+  { "<leader>w>", "<cmd>vertical resize +10<cr>", desc = "Increase window width" },
+  { "<leader>w<", "<cmd>vertical resize -10<cr>", desc = "Decrease window width" },
+})
+
+wk.add({
   { "<leader>t", desc = "picker" },
   {
     mode = { "n" },
