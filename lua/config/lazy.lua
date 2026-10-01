@@ -50,69 +50,20 @@ if vim.fn.filereadable(colorscheme_config) == 1 then
 end
 
 
-local telescope = require('telescope')
+vim.opt.sessionoptions:append("folds")
 
-local search_hidden = false
--- Clone the default Telescope configuration
-local vimgrep_arguments = {
-  'rg',
-  '--color=never',
-  '--no-heading',
-  '--with-filename',
-  '--line-number',
-  '--column',
-  '--smart-case',
-}
-local vimgrep_no_ignore_arguments = {
-  'rg',
-  '--color=never',
-  '--no-heading',
-  '--with-filename',
-  '--line-number',
-  '--column',
-  '--smart-case',
-  '-u'     -- thats the new thing
-}
+local fold_group = vim.api.nvim_create_augroup("AutoSaveFolds", { clear = true })
 
-function Toggle_search_hidden()
-  search_hidden = not search_hidden
-  local message = search_hidden and "Hidden files not excluded" or "Hidden files excluded"
-  vim.notify(message, vim.log.levels.INFO)
+-- Save fold settings when leaving a buffer
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = fold_group,
+  pattern = "*",
+  command = "silent! mkview",
+})
 
-  if search_hidden then
-    telescope.setup {
-      defaults = {
-        vimgrep_arguments = vimgrep_no_ignore_arguments,
-      },
-      pickers = {
-        find_files = {
-          find_command = { "fd", "-HI", "--type", "f" }
-        },
-      }
-    }
-  else
-    telescope.setup {
-      defaults = {
-        vimgrep_arguments = vimgrep_arguments
-      },
-      pickers = {
-        find_files = {
-          find_command = { "fd", "--type", "f" }
-        },
-      }
-    }
-  end
-end
-
-vim.g.clipboard = {
-  name = 'OSC 52',
-  copy = {
-    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-  },
-  paste = {
-    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-  },
-}
-
+-- Restore fold settings when entering a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = fold_group,
+  pattern = "*",
+  command = "silent! loadview",
+})
